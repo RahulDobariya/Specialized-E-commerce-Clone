@@ -1,8 +1,12 @@
-import { legacy_createStore as createStore } from 'redux'
+import { legacy_createStore as createStore, combineReducers, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 
-const store = createStore();
+const rootReducer = combineReducers({ })
 
-export { store };
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
+export { store }
 if (window.Cypress) {
         window.reduxStore = store;
 }
