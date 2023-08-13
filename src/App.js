@@ -6,7 +6,7 @@ function App() {
   return (
     <ChakraProvider>
       <div className="App">
-      <CartPage/>
+      
       </div>
     </ChakraProvider>
   );
