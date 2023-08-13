@@ -1,14 +1,20 @@
 import './App.css';
-import { ChakraProvider } from '@chakra-ui/react'
+// import Navbar from './Components/Navbar';
+
 import ProductPage from './Pages/ProductPage';
+import SingleProductPage from './Pages/SingleProductPage';
+import AllRoutes from './Routes/AllRoutes';
 
 function App() {
   return (
-    <ChakraProvider>
+
       <div className="App">
-     <ProductPage/>
+     {/* <Navbar/> */}
+     <AllRoutes/>
+     {/* <ProductPage/> */}
+     {/* <SingleProductPage/> */}
       </div>
-    </ChakraProvider>
+
   );
 }
 
