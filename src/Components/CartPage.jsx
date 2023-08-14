@@ -8,6 +8,7 @@ import { spf,gmd } from '@fortawesome/fontawesome-free-regular'
 import { Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
 import axios from "axios";
 import styles from "./CartPage.module.css";
+import {useNavigate} from 'react-router-dom';
 
 
 const postData= [
@@ -265,7 +266,7 @@ const postData= [
 
 
 export const CartPage=()=>{
-
+    const navigate=useNavigate();
     const[total,setTotal]=useState(0);
     const[data,setData]=useState([]);
     const[isLoaded,setIsLoaded]=useState(false);
@@ -292,7 +293,7 @@ export const CartPage=()=>{
     }
     useEffect(()=>{
     
-   /*  postData.map((d)=>{
+     /*postData.map((d)=>{
        axios.post("https://cycleshopdata.onrender.com/cart",{...d})
        .then((res)=>{
         console.log(res)
@@ -313,13 +314,13 @@ export const CartPage=()=>{
         
         <h1 className={styles.headding}>Your Orders</h1>
         <Stack w={{ base: '95%', lg: '70%' }} margin="auto">
-        <Skeleton  height="8rem" marginBottom="3rem" />
-        <Skeleton  height="8rem"  marginBottom="3rem" />
-        <Skeleton  height="8rem"  marginBottom="3rem" />
-        <Skeleton  height="8rem"  marginBottom="3rem" />
-        <Skeleton  height="8rem"  marginBottom="3rem" />
-        <Skeleton  height="8rem"  marginBottom="3rem" />
-        <Skeleton  height="8rem"  marginBottom="3rem" />
+        <Skeleton  height="8rem" marginBottom="3rem" borderRadius="10px" />
+        <Skeleton  height="8rem"  marginBottom="3rem" borderRadius="10px"/>
+        <Skeleton  height="8rem"  marginBottom="3rem" borderRadius="10px"/>
+        <Skeleton  height="8rem"  marginBottom="3rem" borderRadius="10px"/>
+        <Skeleton  height="8rem"  marginBottom="3rem" borderRadius="10px"/>
+        <Skeleton  height="8rem"  marginBottom="3rem" borderRadius="10px"/>
+        <Skeleton  height="8rem"  marginBottom="3rem" borderRadius="10px"/>
 
 
         </Stack>
@@ -388,7 +389,7 @@ export const CartPage=()=>{
       <h1 style={{display:"flex",justifyContent:"space-between"}}>Total:  <h1 style={{textDecoration:"line-through",opacity:"0.5",textAlign:"end"}}>€ {total}</h1></h1>
       <p style={{fontSize:"1rem" ,textAlign:"start",display:"flex",justifyContent:"space-between"}}>Discount:  <p style={{}}>10%</p></p>
       <h1 style={{display:"flex",justifyContent:"space-between"}} ><h1 style={{width:"max-content"}}>Total:</h1> € {total-(total/20)}</h1>
-      <Button  width="60%" height="3.5rem" bg="red" fontSize="1.5rem" color="white">Checkout</Button>
+      <Button  width="60%" height="3.5rem" bg="red" fontSize="1.5rem" color="white" >Checkout</Button>
        </div>
   </div>
 </div>

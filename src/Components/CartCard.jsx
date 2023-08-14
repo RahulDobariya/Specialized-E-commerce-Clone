@@ -52,7 +52,7 @@ async function handleDelete(el){
                <div style={{width:"max-content" ,display:"flex" ,alignItems:"center"}}>
             
                 <div style={{display:"flex" ,alignItems:"cener" ,alignContent:"center"}}>
-                <Button colorScheme='black' variant='ghost' fontSize="30px" disabled={count==1} onClick={()=>(setCount(count=>(count!=1?count-1:1)), setTotal(count!=1?total-e.price:total))}>
+                <Button colorScheme='black' variant='ghost' fontSize="30px" disabled={count==1} onClick={()=>(setCount(count=>(count!=1?count-1:1)), setTotal(count!=1?total-e.price:total),setPrice(price=>(price!=e.price?price-e.price:price)))}>
                 -
               </Button>
               <Button colorScheme='black' variant='outline' fontSize="15px" >
@@ -60,7 +60,7 @@ async function handleDelete(el){
               </Button>
               
                    
-                   <Button colorScheme='black' variant='ghost' fontSize="30px" onClick={()=>(setCount(count+1), setTotal(total+e.price))}>
+                   <Button colorScheme='black' variant='ghost' fontSize="30px" onClick={()=>(setCount(count+1), setTotal(total+e.price),setPrice(price+e.price))}>
                 +
               </Button>
                 </div>
@@ -91,7 +91,7 @@ async function handleDelete(el){
         <h3 style={{fontWeight:"700",fontSize:"100%"}}>{e.title}</h3>
         <br />
         <div style={{display:"flex" ,alignItems:"cener" ,alignContent:"center" ,width:"max-content",margin:"auto"}}>
-                <Button colorScheme='black' variant='ghost' fontSize="30px" disabled={count==1} onClick={()=>(setCount(count=>(count!=1?count-1:1)), setTotal(count!=1?total-e.price:total))}>
+                <Button colorScheme='black' variant='ghost' fontSize="30px" disabled={count==1} onClick={()=>(setCount(count=>(count!=1?count-1:1)), setTotal(count!=1?total-e.price:total),setPrice(price=>(price!=e.price?price-e.price:price)))}>
                 -
               </Button>
               <Button colorScheme='black' variant='outline' fontSize="15px" >
