@@ -7,7 +7,7 @@ function App() {
   return (
     <ChakraProvider>
       <div className="App">
-      <PaymentPage/>
+      
       </div>
     </ChakraProvider>
   );
