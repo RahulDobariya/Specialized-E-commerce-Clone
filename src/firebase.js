@@ -4,13 +4,12 @@ import {getAuth} from 'firebase/auth';//imported getAuth
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDi77TdSe6fo5DBUw_Ask4Tee511JX1H-g",
-  authDomain: "email-authentication-db0e4.firebaseapp.com",
-  projectId: "email-authentication-db0e4",
-  storageBucket: "email-authentication-db0e4.appspot.com",
-  messagingSenderId: "820850164829",
-  appId: "1:820850164829:web:0dc3f86ff13324f26ef9b4",
-  measurementId: "G-0MS04LFFRG"
+  apiKey: "AIzaSyDYU73gR_goeBzix0UFwILxYAXc_Oft7vQ",
+  authDomain: "specialized-app-f2748.firebaseapp.com",
+  projectId: "specialized-app-f2748",
+  storageBucket: "specialized-app-f2748.appspot.com",
+  messagingSenderId: "792042899431",
+  appId: "1:792042899431:web:086ff6abdb1af98c125f42"
 };
 
 // Initialize Firebase

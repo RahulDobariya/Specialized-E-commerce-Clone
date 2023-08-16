@@ -12,19 +12,7 @@ import { auth } from '../firebase';
 // anand
 
 const AllRoutes = () => {
-  // anand
-  const [userName,setUserName]=useState("");
-  useEffect(()=>{
-    auth.onAuthStateChanged((user)=>{
-      if(user){
-        setUserName(user.displayName);
-      }else{
-        setUserName("");
-      }
-      console.log(user)
-    })
-  })
-  // anand
+  
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
