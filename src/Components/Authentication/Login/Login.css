@@ -7,7 +7,11 @@
     justify-content: center;
     align-items: center;                                                                                                                                                                                                                                    
 }
-
+.logincontainer .heading{
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
 .logincontainer .innerBox{
     min-width: 400px;
     height: fit-content;
@@ -40,7 +44,7 @@
 }
 
 .logincontainer .loginfooter button:hover{
-    background-color: #a6a4a4 ;
+    background-color: green;
 }
 .logincontainer .loginfooter p{
     font-weight: 700;
