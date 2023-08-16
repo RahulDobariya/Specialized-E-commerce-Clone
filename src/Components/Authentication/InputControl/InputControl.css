@@ -23,3 +23,9 @@
 .inputContainer input:focus{
     border-color: #9900ff;
 }
+
+/* @media (min-width:375px)and(max-width:667px) {
+    .inputContainer input{
+        border-radius: 3px;
+    }
+} */

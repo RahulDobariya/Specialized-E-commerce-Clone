@@ -59,7 +59,7 @@ const Login=()=>{
                 <button disabled={submitButtonDisabled} onClick={handleSubmission}>Login</button>
                 <p>Don't have an account?{" "}
                     <span>
-                        <Link to="/signup">Sing Up</Link>
+                        <Link to="/signup">Sign Up</Link>
                     </span>
                 </p>
             </div>

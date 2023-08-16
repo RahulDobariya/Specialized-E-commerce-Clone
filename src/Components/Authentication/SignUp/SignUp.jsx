@@ -9,14 +9,15 @@ const SignUp=()=>{
     const [values,setValues]=useState({
         name:"",
         email:"",
-        pass:""
+        pass:"",
+        phoneNumber:"",
     });
-
+    console.log(values.phoneNumber);
     const [errorMsg,setErrorMsg]=useState('');
     const[submitButtonDisabled,setSubmitButtonDisabled]=useState(false);
 
     const handleSubmission=()=>{
-        if(!values.name||!values.email||!values.pass){
+        if(!values.name||!values.email||!values.pass||!values.phoneNumber){
             setErrorMsg("Fill all fields")
             return;
         }
@@ -30,6 +31,7 @@ const SignUp=()=>{
             const user=res.user;
             await updateProfile(user,{
                 displayName:values.name,
+                phoneNumber:values.phoneNumber,
             });
             navigate("/");
         }).catch((err)=>{
@@ -44,7 +46,7 @@ const SignUp=()=>{
             <InputControl label="Name" type="text" placeholder="Enter your name" onChange={(event)=>setValues((prev)=>({...prev,name:event.target.value}))}/>
             <InputControl label="Email" type="email"  placeholder="Enter email address" onChange={(event)=>setValues((prev)=>({...prev,email:event.target.value}))}/>
             <InputControl label="Password" type="password" placeholder="Enter your password" onChange={(event)=>setValues((prev)=>({...prev,pass:event.target.value}))}/>
-
+            <InputControl label="Phone No" type="tel" placeholder="Enter your phone no" onChange={(event)=>setValues((prev)=>({...prev,phoneNumber:event.target.value}))}/>
             <div className='signUpfooter'>
                 <b className='errorMsg'>{errorMsg}</b>
                 <button onClick={handleSubmission} disabled={submitButtonDisabled}>SignUp</button>
@@ -54,6 +56,9 @@ const SignUp=()=>{
                     </span>
                 </p>
             </div>
+            {/* <div>
+                {`Welcome to Specilized App ${user}`}
+            </div> */}
         </div>
     </div>
 }

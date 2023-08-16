@@ -49,8 +49,32 @@ import { useDispatch, useSelector } from "react-redux";
 //   resetDebouncing,
 // } from "../Redux/action";
 import { Link, useNavigate } from "react-router-dom";
+import { auth,database } from '../firebase';
+import { signOut } from 'firebase/auth';
 
 const Navbar = () => {
+  const [userName,setUserName]=useState("");
+  const [userEmail,setUserEmail]=useState("");
+  const [userContactNo,setContactNo]=useState("");
+  const [logedIn,setLogedIn]=useState(false);
+  useEffect(()=>{
+    auth.onAuthStateChanged((user)=>{
+      if(user){
+        setUserName(user.displayName);
+        setUserEmail(user.email)
+        setContactNo(user.phoneNumber)
+        setLogedIn(true);
+        console.log(user);
+        console.log(user.phoneNumber);
+      }else{
+        setUserName("");
+        setUserEmail("")
+        setLogedIn(false)
+      }
+      // console.log(user)
+    })
+  })
+  
   const navigate = useNavigate();
   // const { isOpen, onOpen, onClose } = useDisclosure()
   const dispatch = useDispatch();
@@ -83,6 +107,7 @@ const Navbar = () => {
   const toast = useToast();
 
   const confirmLogout = () => {
+    
     setIsLogoutAlertOpen(false);
     onClose();
     // dispatch(logOutUser);
@@ -92,6 +117,11 @@ const Navbar = () => {
       position: "top-left",
       isClosable: true,
     });
+    signOut(database).then(val=>{
+      console.log(val,"val")
+})
+    
+    
   };
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -344,7 +374,7 @@ const Navbar = () => {
                           border={"none"}
                           boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, white 0px 1px 3px 1px"
                         >
-                          {0 === 0 ? (
+                          {logedIn === false ? (
                             <>
                               <MenuItem
                                 bg={"yellow.500"}
@@ -376,6 +406,7 @@ const Navbar = () => {
                           ) : (
                             <Box borderRadius={"10px"} maxW="300px">
                               <Text py={"5px"}>ACCOUNT</Text> <MenuDivider />
+                              {logedIn?`Welcome ${userName}`:`YOU ARE NOT LOGGED IN`}
                               <Button
                                 leftIcon={<Avatar size={"xs"} bg="blue.600" />}
                                 w="100%"
@@ -384,6 +415,7 @@ const Navbar = () => {
                                 colorScheme="facebook"
                               >
                                 {/* {currUser.firstName + " " + currUser.lastName} */}
+                                {userName}
                               </Button>
                               <br />
                               <Button
@@ -393,6 +425,7 @@ const Navbar = () => {
                                 colorScheme="facebook"
                               >
                                 {/* {currUser.contact} */}
+                                {userContactNo}
                               </Button>
                               <Button
                                 leftIcon={<EmailIcon />}
@@ -402,6 +435,7 @@ const Navbar = () => {
                                 colorScheme="facebook"
                               >
                                 {/* {currUser.email} */}
+                                {userEmail}
                               </Button>
                               <br />
                               <Button
