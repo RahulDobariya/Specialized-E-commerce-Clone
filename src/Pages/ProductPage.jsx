@@ -8,23 +8,46 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  Button,
+  Checkbox,
   Flex,
   List,
   ListItem,
+  Select,
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
-import FilterSidebar from "./FilterSidebar";
 
 const ProductPage = () => {
   const [product, setProduct] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [orderBy, setOrderBy] = useState("");
+  const [sort, setSort] = useState("");
+  const [page, setPage] = useState(1);
+  const limit = 10;
+  // const sort="price"
+  /*===================================================================== */
+  const getApiUrl = (url, selectedCategory, sort, orderBy) => {
+    if (selectedCategory) {
+      return (url = `${url}?category=${selectedCategory}`);
+    } 
+    else if (orderBy || sort) {
+       console.log(sort);
+       console.log(orderBy)
+      url = `${url}?_sort=${sort}&_order=${orderBy}`
+    console.log(url) 
+    return url
+    }
+    
+    return url;
 
-  const handleCategorySelect = (category) => {
-    setSelectedCategory(category);
-
-    // Implement logic to filter products based on the selected category
   };
-  const categories = ["Mountain", "Road", "Active"];
+
+
+  /* else if (orderBy && sort) {
+      return (url = `${url}?_sort=${sort}&_order=${orderBy}`);
+    } */
+  /*======================================================================= */
+  const categories = ["Mountain", "Road", "Active", "Kids", "Electric"];
   const group = ["Bikes", "E - Bikes", "Framesets", "Seatposts"];
   const productFamily = [
     "Allez",
@@ -61,13 +84,38 @@ const ProductPage = () => {
     "$5000 - $10000",
     "Greater than $10000 ",
   ];
- 
+
   const material = ["Carbon", "Aluminum", "Alloy"];
-  const size = [6,7,9,12,16,20,24,26,"XXS","XS","S","M","L","XL","XXL","S1","S2","S3"];
+  const size = [
+    6,
+    7,
+    9,
+    12,
+    16,
+    20,
+    24,
+    26,
+    "XXS",
+    "XS",
+    "S",
+    "M",
+    "L",
+    "XL",
+    "XXL",
+    "S1",
+    "S2",
+    "S3",
+  ];
   /*================================================================= */
   const getData = async () => {
+    const apiUrl = getApiUrl(
+      `https://cycleshopdata.onrender.com/products`,
+      selectedCategory,
+      sort,
+      orderBy
+    );
     try {
-      let res = await axios.get(`https://cycleshopdata.onrender.com/products`);
+      let res = await axios.get(apiUrl);
       console.log(res.data);
       setProduct(res.data);
     } catch (error) {
@@ -77,14 +125,61 @@ const ProductPage = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [selectedCategory, orderBy]);
+  const handleChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
+
+  const handleOrder = (e) => {
+    setOrderBy(e.target.value);
+  };
+
+  const handleSort = (e) => {
+    setSort(e.target.value);
+  };
   /*=============================================================================*/
 
   return (
-    <>
-      <Flex>
+    <div style={{ background: "#242124", color: "white" }}>
+      <div style={{ display: "flex", justifyContent: "right" }}>
+        <label style={{ backgroundColor: "#242124", color: "white" }}>
+          <Select
+            value={sort}
+            onChange={handleSort}
+            backgroundColor={"#242124"}
+            _hover={"gray"}
+          >
+            <option value="" style={{ backgroundColor: "#242124" }}>
+              Sort By
+            </option>
+            <option style={{ backgroundColor: "#242124" }} value="price">
+              Price
+            </option>
+            <option style={{ backgroundColor: "#242124" }} value="category">
+              Category
+            </option>
+            <option style={{ backgroundColor: "#242124" }} value="title">
+              Title
+            </option>
+          </Select>
+        </label>
+        <label>
+          <Select value={orderBy} onChange={handleOrder} color={"white"}>
+            <option style={{ backgroundColor: "#242124" }} value="">
+              Select an option
+            </option>
+            <option style={{ backgroundColor: "#242124" }} value="asc">
+              Low to High
+            </option>
+            <option style={{ backgroundColor: "#242124" }} value="desc">
+              High to Low
+            </option>
+          </Select>
+        </label>
+      </div>
+      <Flex mt={"-20px"}>
         <div>
-          <div style={{ margin: "50px 0px" }}>
+          <div style={{ marginTop: "47px" }}>
             <Accordion allowMultiple>
               <AccordionItem>
                 {({ isExpanded }) => (
@@ -103,10 +198,27 @@ const ProductPage = () => {
                     </h2>
                     <AccordionPanel pb={4}>
                       <Flex textAlign={"left"}>
-                        <FilterSidebar
-                          categories={categories}
-                          onCategorySelect={handleCategorySelect}
-                        />
+                        <List>
+                          {categories.map((category) => (
+                            <ListItem key={category}>
+                              <Checkbox
+                                value={category}
+                                checked={selectedCategory === category}
+                                onChange={handleChange}
+                              >
+                                {category}
+                              </Checkbox>
+                            </ListItem>
+                          ))}
+                          <ListItem>
+                            <Checkbox
+                              checked={selectedCategory === ""}
+                              onChange={() => setSelectedCategory("")}
+                            >
+                              RESET
+                            </Checkbox>
+                          </ListItem>
+                        </List>
                       </Flex>
                     </AccordionPanel>
                   </>
@@ -171,6 +283,8 @@ const ProductPage = () => {
                 )}
               </AccordionItem>
               {/* =================================================================================== */}
+              {/* ====================================================================================== */}
+              {/* ====================================================================================== */}
               <AccordionItem>
                 {({ isExpanded }) => (
                   <>
@@ -193,7 +307,7 @@ const ProductPage = () => {
                             <ListItem key={ele}>{ele}</ListItem>
                           ))}
                         </List>
-                        {/* <Box p={4}></Box> */}
+                        {/* <Box p={4}></Box>*/}
                       </Flex>
                     </AccordionPanel>
                   </>
@@ -270,9 +384,39 @@ const ProductPage = () => {
                   </>
                 )}
               </AccordionItem>
+              {/* ======================================================================= */}
+              <AccordionItem>
+                {({ isExpanded }) => (
+                  <>
+                    <h2>
+                      <AccordionButton width={300}>
+                        <Box as="span" flex="1" textAlign="left" width={"20%"}>
+                         PRODUCT FAMILY
+                        </Box>
+                        {isExpanded ? (
+                          <MinusIcon fontSize="12px" />
+                        ) : (
+                          <AddIcon fontSize="12px" />
+                        )}
+                      </AccordionButton>
+                    </h2>
+                    <AccordionPanel pb={4}>
+                      <Flex textAlign={"left"}>
+                        <List>
+                          {productFamily.map((ele) => (
+                            <ListItem key={ele}>{ele}</ListItem>
+                          ))}
+                        </List>
+                        {/* <Box p={4}></Box> */}
+                      </Flex>
+                    </AccordionPanel>
+                  </>
+                )}
+              </AccordionItem>
             </Accordion>
           </div>
         </div>
+
         <div
           style={{
             display: "flex",
@@ -290,12 +434,13 @@ const ProductPage = () => {
                 category={ele.category}
                 description={ele.description}
                 id={ele.id}
+                ele={ele}
               />
             </div>
           ))}
         </div>
       </Flex>
-    </>
+    </div>
   );
 };
 export default ProductPage;

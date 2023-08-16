@@ -1,19 +1,28 @@
-import { ButtonGroup, Card, CardBody,CardFooter,Heading,Image, Stack ,Text} from "@chakra-ui/react";
+import { Button, ButtonGroup, Card, CardBody,CardFooter,Heading,Image, Stack ,Text} from "@chakra-ui/react";
+import axios from "axios";
 import React from "react";
 import {Link} from 'react-router-dom'
-const ProductCard = ({ id, image, title, description, category, price }) => {
- 
+const ProductCard = ({ id, image, title, price,ele }) => {
+  //  https://cycleshopdata.onrender.com/products/${id}`
+
+    const addToCart=(product)=>{
+    axios
+      .post(`https://cycleshopdata.onrender.com/cart`, product)
+      .then((res) => {
+        window.alert("Added");
+      })
+      .catch((err) => {
+        window.alert("Already Added to Cart");
+        console.log(err);
+      });
+  };
 
   return (
     <div>
-      <Link to={`/productPage/${id}`}>
-        <Card maxW="sm">
+      <Card maxW="sm">
+        <Link to={`/productPage/${id}`}>
           <CardBody>
-            <Image
-              src={image}
-              alt={title}
-              borderRadius="lg"
-            />
+            <Image src={image} alt={title} borderRadius="lg" />
             <Stack mt="6" spacing="3">
               <Heading size="md">{title}</Heading>
 
@@ -22,12 +31,20 @@ const ProductCard = ({ id, image, title, description, category, price }) => {
               </Text>
             </Stack>
           </CardBody>
-
-          <CardFooter>
-            <ButtonGroup spacing="2"></ButtonGroup>
-          </CardFooter>
-        </Card>
-      </Link>
+        </Link>
+        <CardFooter margin={"0px auto"} alignItems={"center"} color={"red"}>
+          <ButtonGroup spacing="2">
+            <Button
+              onClick={() => addToCart(ele)}
+              backgroundColor={"red"}
+              _hover={"gray"}
+              color={"white"}
+            >
+              Add To Cart
+            </Button>
+          </ButtonGroup>
+        </CardFooter>
+      </Card>
 
       {/*================================================================  */}
       {/* <Link
