@@ -1,0 +1,42 @@
+.resloader{
+
+}
+.loader{
+    background-color:#262626;
+    min-height:59rem;
+    padding-top:3em;
+}
+
+.resbox{
+display: none;
+padding: 2rem;
+border-radius: 8px;
+width: max-content;
+
+margin: auto;
+
+background-color: rgba(240, 240, 240, 1);
+}
+.box{
+display: block;
+}
+
+@media screen and (max-width: 772px) {
+    .resbox{
+        display: block;
+        width: 60%;
+        }
+        .box{
+        display: none;
+        }
+  }
+
+  @media screen and (max-width: 500px) {
+    .resbox{
+        display: block;
+        width: 75%;
+        }
+        .box{
+        display: none;
+        }
+  }
