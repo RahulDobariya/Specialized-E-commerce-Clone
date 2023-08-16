@@ -161,9 +161,7 @@ const handlePayment = () => {
             isClosable: true,
           })
         ):"",
-        pay(),
-        handlePayment(),
-        rpay?initiatePayment():""
+        pay()
         
       
         )
