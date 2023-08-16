@@ -463,7 +463,7 @@ const Navbar = () => {
           <Link className="navBelowLink" _hover={{ underLine: "none" }}>
             Delivery
           </Link>
-          <Link className="navBelowLink" _hover={{ underLine: "none" }}>
+          <Link to="/payment" className="navBelowLink" _hover={{ underLine: "none" }}>
             Payment
           </Link>
           <Link className="navBelowLink" _hover={{ underLine: "none" }}>
