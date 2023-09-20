@@ -1,5 +1,5 @@
 # Specialized-E-commerce
-
+This an e-commerce website resembling Specialized Bicycles, India's largest cycling store
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
